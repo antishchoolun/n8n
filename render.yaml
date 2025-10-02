@@ -1,0 +1,22 @@
+services:
+  - type: web
+    name: n8n-app
+    env: docker
+    plan: starter  # Required for persistent disk
+    autoDeploy: true
+    healthCheckPath: /
+    disk:
+      name: n8n-data
+      mountPath: /home/node/.n8n  # CRITICAL: This exact path
+      sizeGB: 1
+    envVars:
+      - key: PORT
+        value: "5678"
+      - key: N8N_HOST
+        value: "0.0.0.0"
+      - key: N8N_PORT
+        value: "5678"
+      - key: N8N_PROTOCOL
+        value: "https"
+      - key: N8N_USER_FOLDER
+        value: "/home/node/.n8n"
